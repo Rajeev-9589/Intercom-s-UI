@@ -171,11 +171,10 @@ export default function Sidebar({ onSelectConversation }) {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`flex items-center gap-1 whitespace-nowrap px-2 py-1 text-xs font-semibold rounded-full focus:outline-none ${
-                  activeFilter === filter.id
+                className={`flex items-center gap-1 whitespace-nowrap px-2 py-1 text-xs font-semibold rounded-full focus:outline-none ${activeFilter === filter.id
                     ? 'bg-blue-100 text-blue-700'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {filter.label}
                 <span className="inline-block min-w-[18px] px-1 text-xs font-semibold text-center rounded-full bg-gray-300 text-gray-700">
@@ -194,9 +193,8 @@ export default function Sidebar({ onSelectConversation }) {
               <li
                 key={conv.id}
                 onClick={() => handleSelect(conv)}
-                className={`flex items-center gap-3 px-4 py-3 cursor-pointer ${
-                  conv.unread ? 'bg-blue-50' : 'hover:bg-gray-100'
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 cursor-pointer ${conv.unread ? 'bg-blue-50' : 'hover:bg-gray-100'
+                  }`}
               >
                 <div
                   className={`flex items-center justify-center rounded-full w-10 h-10 shrink-0 overflow-hidden

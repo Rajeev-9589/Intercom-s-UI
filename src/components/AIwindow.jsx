@@ -3,7 +3,7 @@ import { BsRobot } from 'react-icons/bs';
 import { FiSend, FiHelpCircle } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react';
 
-export default function AIwindow({ addToComposer, isOpen, onClose }) {
+export default function AIwindow({ addToComposer, isOpen, onClose, askText }) {
   const [text, setText] = useState('');
   const [activeTab, setActiveTab] = useState('ai');
   const [messages, setMessages] = useState([]);
@@ -25,6 +25,11 @@ export default function AIwindow({ addToComposer, isOpen, onClose }) {
       });
     }
   }, [messages, isTyping]);
+  useEffect(() => {
+    if (askText && askText.trim()) {
+      handleSend(askText);
+    }
+  }, [askText]);
 
   const handleSend = (msg) => {
     if (!msg.trim()) return;
@@ -55,7 +60,7 @@ export default function AIwindow({ addToComposer, isOpen, onClose }) {
         },
       ]);
       setIsTyping(false);
-    }, 1500);
+    }, 1000);
   };
 
   const variants = {
@@ -98,17 +103,15 @@ export default function AIwindow({ addToComposer, isOpen, onClose }) {
     <>
       {/* Backdrop for mobile */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-30 z-30 transition-opacity md:hidden ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black bg-opacity-30 z-30 transition-opacity md:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={onClose}
       />
 
       {/* AI Side Panel */}
       <div
-        className={`fixed top-0 right-0 bottom-0 w-full sm:w-[22rem] max-w-full bg-white border-l shadow-lg flex flex-col z-40 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } md:translate-x-0 md:static md:flex`}
+        className={`fixed top-0 right-0 bottom-0 w-full sm:w-[22rem] max-w-full bg-white border-l shadow-lg flex flex-col z-40 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          } md:translate-x-0 md:static md:flex`}
       >
         {/* Tabs */}
         <div className="flex border-b bg-gray-50">
@@ -116,11 +119,10 @@ export default function AIwindow({ addToComposer, isOpen, onClose }) {
             <button
               key={tab}
               onClick={() => handleTabClick(tab)}
-              className={`flex-1 text-center py-3 font-semibold text-sm transition-colors ${
-                activeTab === tab
+              className={`flex-1 text-center py-3 font-semibold text-sm transition-colors ${activeTab === tab
                   ? 'text-blue-600 border-b-2 border-blue-600'
                   : 'text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-300'
-              }`}
+                }`}
             >
               {tab === 'ai' ? 'AI Copilot' : 'Details'}
             </button>
@@ -171,11 +173,10 @@ export default function AIwindow({ addToComposer, isOpen, onClose }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.3, ease: 'easeOut' }}
-                        className={`max-w-xl px-4 py-2 rounded-lg border break-words whitespace-pre-wrap word-break break-all text-xs relative ${
-                          from === 'user'
+                        className={`max-w-xl px-4 py-2 rounded-lg border break-words whitespace-pre-wrap word-break break-all text-xs relative ${from === 'user'
                             ? 'bg-blue-100 border-blue-300 ml-auto text-gray-900 shadow-sm'
                             : 'bg-white border-gray-300 text-gray-800 shadow-sm'
-                        }`}
+                          }`}
                       >
                         {text}
 

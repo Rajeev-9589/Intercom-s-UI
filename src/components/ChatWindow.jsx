@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MessageInput from './MessageInput';
 
-export default function ChatWindow({ conversation, text, setText }) {
-  console.log(conversation)
+export default function ChatWindow({ conversation, text, setText, setAskText }) {
+  const askRef = useRef(null);
+
   const [messages, setMessages] = useState([
     {
       from: 'customer',
@@ -13,16 +14,25 @@ export default function ChatWindow({ conversation, text, setText }) {
   const [selectedText, setSelectedText] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
-
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
+    const handleClickOutside = (event) => {
+      if (
+        askRef.current &&
+        !askRef.current.contains(event.target)
+      ) {
+        // Only clear if there's no selected text anymore
+        if (!window.getSelection().toString().trim()) {
+          setSelectedText('');
+        }
       }
-    }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
+
 
   const addMessage = (msg) => {
     setMessages((prev) => [...prev, msg]);
@@ -31,7 +41,7 @@ export default function ChatWindow({ conversation, text, setText }) {
 
     setTimeout(() => {
 
-       if (lower.includes('please contact our support') || lower.includes('exception')) {
+      if (lower.includes('please contact our support') || lower.includes('exception')) {
         setMessages((prev) => [
           ...prev,
           {
@@ -67,18 +77,18 @@ export default function ChatWindow({ conversation, text, setText }) {
     <div className="flex-1 flex flex-col bg-gray-50 border rounded-xl shadow-sm relative max-w-full md:max-w-none">
       {/* Header */}
       <header className="flex items-center justify-between gap-3 p-4 border-b bg-white shadow-sm sticky top-0 z-10">
-       <div className="flex items-center gap-3">
-        <img
-  src={conversation.avatar}
-  alt={conversation.name}
-  className="w-10 h-10 rounded-full object-cover"
-/>
-<div className="flex flex-col">
-  <span className="font-semibold text-sm text-gray-900 truncate max-w-xs">
-    {conversation.name}
-  </span>
-  <span className="text-xs text-green-500">Online</span>
-</div>
+        <div className="flex items-center gap-3">
+          <img
+            src={conversation.avatar}
+            alt={conversation.name}
+            className="w-10 h-10 rounded-full object-cover"
+          />
+          <div className="flex flex-col">
+            <span className="font-semibold text-sm text-gray-900 truncate max-w-xs">
+              {conversation.name}
+            </span>
+            <span className="text-xs text-green-500">Online</span>
+          </div>
         </div>
         <div className="relative" ref={menuRef}>
           <button
@@ -130,15 +140,14 @@ export default function ChatWindow({ conversation, text, setText }) {
       </header>
 
       {/* Messages */}
-     <div className="flex-1 px-4 py-3 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 text-sm text-gray-800">
+      <div className="flex-1 px-4 py-3 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 text-sm text-gray-800">
         {messages.map((msg, index) => (
           <motion.div
             key={index}
-            className={`relative whitespace-pre-line select-text max-w-xs sm:max-w-md md:max-w-lg px-4 py-2 rounded-lg shadow-sm border text-sm ${
-              msg.from === 'agent'
-                ? 'ml-auto bg-white border-gray-200'
-                : 'ml-0 bg-blue-100 text-blue-900 border-blue-200'
-            }`}
+            className={`relative whitespace-pre-line select-text max-w-xs sm:max-w-md md:max-w-lg px-4 py-2 rounded-lg shadow-sm border text-sm ${msg.from === 'agent'
+              ? 'ml-auto bg-white border-gray-200'
+              : 'ml-0 bg-blue-100 text-blue-900 border-blue-200'
+              }`}
             onMouseUp={() => {
               const selection = window.getSelection().toString().trim();
               if (selection) setSelectedText(selection);
@@ -152,16 +161,21 @@ export default function ChatWindow({ conversation, text, setText }) {
 
       {/* Ask Fin Copilot button */}
       {selectedText && (
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30">
+        <div
+          ref={askRef}
+          className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white border shadow-md px-4 py-2 rounded-full flex items-center gap-2"
           >
-            <span className="text-sm text-gray-600 truncate max-w-[200px]">{selectedText}</span>
+            <span className="text-sm text-gray-600 truncate max-w-[200px]">
+              {selectedText}
+            </span>
             <button
               onClick={() => {
-                alert(`Sent to Fin Copilot: "${selectedText}"`);
+                setAskText(selectedText);
               }}
               className="bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-blue-700"
             >

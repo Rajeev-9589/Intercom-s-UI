@@ -17,7 +17,7 @@ export default function MessageInput({ text, setText, onSend }) {
     setText('');
   };
 
- return (
+  return (
     <motion.div
       layout
       className="border-t bg-white p-3"
@@ -25,9 +25,8 @@ export default function MessageInput({ text, setText, onSend }) {
       transition={{ duration: 0.25 }}
     >
       <div
-        className={`flex items-center justify-between border border-gray-300 shadow-sm bg-white px-4 rounded-lg ${
-          isFocused ? 'py-1' : 'py-3'
-        }`}
+        className={`flex items-center justify-between border border-gray-300 shadow-sm bg-white px-4 rounded-lg ${isFocused ? 'py-1' : 'py-3'
+          }`}
       >
         <button
           className="flex items-center gap-1 text-sm text-gray-700 font-medium"
@@ -54,6 +53,13 @@ export default function MessageInput({ text, setText, onSend }) {
           </button>
           <button type="button" aria-label="Attach file">
             <FiPaperclip size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={sendMessage}
+            className="text-sm text-blue-600 font-medium hover:underline"
+          >
+            Send
           </button>
         </div>
       </div>

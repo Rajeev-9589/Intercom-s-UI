@@ -7,6 +7,7 @@ import { BsRobot } from 'react-icons/bs';
 function App() {
   const [text, setText] = useState('');
   const [aiOpen, setAiOpen] = useState(false);
+  const [askText, setAskText] = useState('');
 
   const [selectedConversation, setSelectedConversation] = useState({
     id: 1,
@@ -36,6 +37,7 @@ function App() {
             conversation={selectedConversation}
             text={text}
             setText={setText}
+            setAskText={setAskText}
           />
         ) : (
           <div className="flex items-center justify-center h-full text-gray-500">
@@ -45,12 +47,12 @@ function App() {
       </div>
 
       {/* AI Assistant Panel */}
-      <AIwindow isOpen={aiOpen} onClose={() => setAiOpen(false)} addToComposer={addToComposer} />
+      <AIwindow isOpen={aiOpen} onClose={() => setAiOpen(false)} addToComposer={addToComposer} askText={askText} />
 
       {/* Floating Button on Mobile */}
       <button
         className="md:hidden fixed bottom-6 right-6 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none"
-        onClick={() => setAiOpen(true)}
+        onClick={() => setAiOpen(prev => !prev)}
         aria-label="Open AI Assistant"
       >
         <BsRobot size={20} />
