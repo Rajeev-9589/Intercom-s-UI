@@ -1,12 +1,38 @@
-# React + Vite
+# 🟢 Intercom UI Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and modern UI clone of the popular Intercom chat interface, built using **React**, **Tailwind CSS**, **ShadCN UI**, and **Lucide Icons**. This project is a front-end clone meant for UI demonstration and layout purposes.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 💬 **Predefined Chat Data** – Simulates chat interactions using mock data.
+- 🔄 **Chat Swapping** – Easily switch between different chat threads.
+- ⚡ **Responsive Design** – Fully responsive layout using Tailwind CSS.
+- 🎨 **ShadCN Components** – Clean and customizable components.
+- 🔍 **Lucide Icons** – Beautiful, consistent icon set.
 
-## Expanding the ESLint configuration
+## Deployed URL 
+https://intercoms-agentchatui.netlify.app/
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ShadCN UI](https://ui.shadcn.com/)
+- [Lucide Icons](https://lucide.dev/)
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/Rajeev-9589/intercom-s-ui-clone.git
+
+# 2. Navigate into the project directory
+cd intercom-ui-clone
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
