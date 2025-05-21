@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MessageInput from './MessageInput';
-
+import { Button } from './ui/button';
+import { Moon,  X } from "lucide-react";
 export default function ChatWindow({ conversation, text, setText, setAskText }) {
   const askRef = useRef(null);
 
@@ -90,53 +91,49 @@ export default function ChatWindow({ conversation, text, setText, setAskText }) 
             <span className="text-xs text-green-500">Online</span>
           </div>
         </div>
-        <div className="relative" ref={menuRef}>
-          <button
-            onClick={() => setMenuOpen((open) => !open)}
-            className="p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          >
-            <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </button>
-
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-20"
+        <div className="flex items-center gap-2">
+          {/* Menu Button */}
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen((open) => !open)}
+              className="p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
-              <button
-                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-                onClick={() => {
-                  alert('Marked as unread');
-                  setMenuOpen(false);
-                }}
+              <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </button>
+
+            {menuOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                className="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-20"
               >
-                Mark as unread
-              </button>
-              <button
-                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-                onClick={() => {
-                  alert('Archived');
-                  setMenuOpen(false);
-                }}
-              >
-                Archive
-              </button>
-              <button
-                className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-100"
-                onClick={() => {
-                  alert('Deleted');
-                  setMenuOpen(false);
-                }}
-              >
-                Delete
-              </button>
-            </motion.div>
-          )}
+                <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => { alert('Marked as unread'); setMenuOpen(false); }}>
+                  Mark as unread
+                </button>
+                <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => { alert('Archived'); setMenuOpen(false); }}>
+                  Archive
+                </button>
+                <button className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-100" onClick={() => { alert('Deleted'); setMenuOpen(false); }}>
+                  Delete
+                </button>
+              </motion.div>
+            )}
+          </div>
+
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <Moon className="h-4 w-4" />
+          </Button>
+
+  
+          <Button className="bg-black text-white hover:bg-black/80 h-8 px-3 text-sm rounded-full">
+            <X className="mr-2 h-4 w-4" />
+            Close
+          </Button>
         </div>
+
       </header>
 
       {/* Messages */}

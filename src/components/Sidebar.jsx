@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiMail, FiMenu } from 'react-icons/fi';
 
+//Dummy Conversations and filter  
 const conversations = [
   {
     id: 1,
@@ -24,19 +25,9 @@ const conversations = [
     waitingSinceMinutes: 15,
     avatar: 'https://randomuser.me/api/portraits/men/44.jpg',
   },
+
   {
     id: 3,
-    name: 'Lead from New York',
-    snippet: 'Good morning, let me know your availability...',
-    time: '40m',
-    unread: true,
-    archived: false,
-    open: false,
-    waitingSinceMinutes: 300,
-    avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-  },
-  {
-    id: 4,
     name: 'Emma · Spotify',
     snippet: 'Thanks for your help yesterday!',
     time: '10m',
@@ -47,7 +38,7 @@ const conversations = [
     avatar: 'https://randomuser.me/api/portraits/women/12.jpg',
   },
   {
-    id: 5,
+    id: 4,
     name: 'Raj · Google',
     snippet: 'Can you check the report I sent?',
     time: '5h',
@@ -56,41 +47,7 @@ const conversations = [
     open: true,
     waitingSinceMinutes: 200,
     avatar: 'https://randomuser.me/api/portraits/men/52.jpg',
-  },
-  {
-    id: 6,
-    name: 'Sophia · Amazon',
-    snippet: 'Is the shipment on track?',
-    time: '1d',
-    unread: false,
-    archived: false,
-    open: false,
-    waitingSinceMinutes: 400,
-    avatar: 'https://randomuser.me/api/portraits/women/22.jpg',
-  },
-  {
-    id: 7,
-    name: 'Alex · Tesla',
-    snippet: 'Please update me on the new project.',
-    time: '3h',
-    unread: true,
-    archived: false,
-    open: true,
-    waitingSinceMinutes: 180,
-    avatar: 'https://randomuser.me/api/portraits/men/11.jpg',
-  },
-  {
-    id: 8,
-    name: 'Maya · Netflix',
-    snippet: 'Loved the last feature update!',
-    time: '2d',
-    unread: false,
-    archived: false,
-    open: false,
-    waitingSinceMinutes: 500,
-    avatar: 'https://randomuser.me/api/portraits/women/33.jpg',
-  },
-];
+  }]
 
 const FILTERS = [
   {

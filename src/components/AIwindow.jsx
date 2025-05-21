@@ -11,6 +11,7 @@ export default function AIwindow({ addToComposer, isOpen, onClose, askText }) {
   const [tooltipVisibleId, setTooltipVisibleId] = useState(null);
   const containerRef = useRef(null);
 
+//Predefined Suggestions 
   const suggestions = [
     { id: 1, question: 'How do I get a refund?', answer: 'To get a refund, please contact our support within 30 days of purchase with your order details.' },
     { id: 2, question: 'Where can I track my order?', answer: 'You can track your order status in the "Orders" section of your account dashboard.' },
@@ -154,7 +155,6 @@ export default function AIwindow({ addToComposer, isOpen, onClose, askText }) {
                     </div>
                   </div>
                 </header>
-
                 <div
                   ref={containerRef}
                   className="flex-1 px-2 sm:px-4 overflow-y-auto space-y-2 my-3 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 scrollbar-track-gray-100"

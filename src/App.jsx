@@ -8,7 +8,7 @@ function App() {
   const [text, setText] = useState('');
   const [aiOpen, setAiOpen] = useState(false);
   const [askText, setAskText] = useState('');
-
+// initial state of opened conversation
   const [selectedConversation, setSelectedConversation] = useState({
     id: 1,
     name: 'Luis · GitHub',
